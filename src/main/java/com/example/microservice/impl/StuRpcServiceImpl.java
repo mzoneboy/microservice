@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-//@Service
-//@Component
+@Service
+@Component
 public class StuRpcServiceImpl implements StuRpcService {
     private final static Logger logger = LoggerFactory.getLogger(StuRpcServiceImpl.class);
     @Override

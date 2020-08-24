@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jms.annotation.EnableJms;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.spring.annotation.MapperScan;
@@ -18,6 +19,7 @@ import java.util.Map;
 //@EnableDubboConfiguration
 @MapperScan("com.example.microservice.mapper")
 @EnableDubbo
+@EnableJms    // 启动消息队列
 @RestController
 @SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
 //@NacosPropertySource(dataId = "example", autoRefreshed = true)

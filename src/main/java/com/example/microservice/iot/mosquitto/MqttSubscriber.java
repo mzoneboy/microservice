@@ -1,17 +1,17 @@
-package com.example.microservice.iot;
+package com.example.microservice.iot.mosquitto;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MqttPublisher {
-    private static final Logger logger = LoggerFactory.getLogger(MqttPublisher.class);
+public class MqttSubscriber {
+    private static final Logger logger = LoggerFactory.getLogger(MqttSubscriber.class);
     //tcp://MQTT安装的服务器地址:MQTT定义的端口号
     public static final String HOST = "tcp://localhost:1883";
 
     //定义MQTT的ID，可以在MQTT服务配置中指定
-    private static final String clientid = "server11";
+    private static final String clientid = "server33";
 
     private MqttClient client;
     private String userName = "mosquitto";
@@ -21,7 +21,7 @@ public class MqttPublisher {
      * 构造函数
      * @throws MqttException
      */
-    public MqttPublisher() throws MqttException {
+    public MqttSubscriber() throws MqttException {
         // MemoryPersistence设置clientid的保存形式，默认为以内存保存
         client = new MqttClient(HOST, clientid, new MemoryPersistence());
         connect();
@@ -39,7 +39,9 @@ public class MqttPublisher {
         options.setConnectionTimeout(10);
         // 设置会话心跳时间
         options.setKeepAliveInterval(20);
+        options.setAutomaticReconnect(true);
         try {
+            System.out.println("客户端开始建立连接");
             client.setCallback(new PushCallback());
             client.connect(options);
         } catch (Exception e) {
@@ -50,17 +52,36 @@ public class MqttPublisher {
     /**
      *
      * @param topic
-     * @param message
      * @throws MqttPersistenceException
      * @throws MqttException
      */
-    public void publish(String topic, MqttMessage message) throws MqttPersistenceException,
+    public void subscribe(String topic) throws MqttPersistenceException,
             MqttException {
-        MqttDeliveryToken token = client.getTopic(topic).publish(message);
-        token.waitForCompletion();
-        logger.info("message is published completely! "
-                + token.isComplete());
+        if(null == client.getTopic(topic)){
+            client.subscribe(topic, 1);
+            logger.info("subscribe {} completely! "
+                    , topic);
+        }
+
     }
 
 
+    public static void main(String[] args) {
+        MqttSubscriber mqttSubscriber;
+        try {
+            mqttSubscriber = new MqttSubscriber();
+            mqttSubscriber.subscribe("newone");
+           /* mqttSubscriber.client.publish("newone", "are u ok".getBytes(), 0, false);
+            System.out.println("发送成功:"+"are u ok");
+            while (true){
+                Thread.sleep(10L);
+            }*/
+
+        } catch (MqttException  e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.microservice.controller;
 
-import com.example.microservice.iot.MqttPublisher;
+import com.example.microservice.iot.mosquitto.MqttPublisher;
+import com.example.microservice.iot.mosquitto.MqttSubscriber;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.slf4j.Logger;
@@ -26,6 +27,19 @@ public class MqttController {
             mqttMessage.setRetained(true);
             mqttMessage.setPayload(msg.getBytes());
             mqttPublisher.publish(topic, mqttMessage);
+        } catch (MqttException e) {
+            logger.error(e.toString());
+        }
+
+        return "success";
+    }
+
+    @RequestMapping("sub")
+    public String subTopic(String topic){
+        MqttSubscriber mqttSubscriber;
+        try {
+            mqttSubscriber = new MqttSubscriber();
+            mqttSubscriber.subscribe(topic);
         } catch (MqttException e) {
             logger.error(e.toString());
         }

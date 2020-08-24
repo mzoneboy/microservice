@@ -1,4 +1,4 @@
-package com.example.microservice.iot;
+package com.example.microservice.iot.mosquitto;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
