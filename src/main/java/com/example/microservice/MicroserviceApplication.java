@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 //import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
 //import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -26,8 +27,8 @@ import java.util.Map;
 public class MicroserviceApplication {
 
 	@RequestMapping("/")
-	String home() {
-		return "Hello World11!";
+	String home(@Value("${server.port}") String port) {
+		return "Hello World11!" + port;
 	}
 
 	@Autowired
