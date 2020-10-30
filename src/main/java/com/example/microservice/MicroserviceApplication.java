@@ -1,8 +1,8 @@
 package com.example.microservice;
 
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
-//import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
-//import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
+import com.alibaba.nacos.api.config.annotation.NacosProperty;
+import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -14,16 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.spring.annotation.MapperScan;
 
-import java.util.List;
-import java.util.Map;
+
 
 //@EnableDubboConfiguration
+@NacosPropertySource(dataId = "nacos-config", autoRefreshed = true)
 @MapperScan("com.example.microservice.mapper")
 @EnableDubbo
 @EnableJms    // 启动消息队列
 @RestController
 @SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
-//@NacosPropertySource(dataId = "example", autoRefreshed = true)
 public class MicroserviceApplication {
 
 	@RequestMapping("/")
