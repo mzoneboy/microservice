@@ -1,4 +1,4 @@
-package com.example.microservice;
+package com.example.microservice.jvm;
 
 
 import java.util.ArrayList;

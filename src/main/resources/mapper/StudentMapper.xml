@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.microservice.dao.IStudentDao">
+    <!--    配置查询所有 id为方法名 resultType指定封装的实体类型-->
+    <select id="queryList" resultType="com.example.microservice.Entity.Student">
+        select * from student
+    </select>
+
+    <select id="queryPage" resultType="com.example.microservice.Entity.Student">
+        select * from student
+    </select>
+</mapper>

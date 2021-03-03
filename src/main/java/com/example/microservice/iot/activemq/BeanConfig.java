@@ -1,6 +1,6 @@
 package com.example.microservice.iot.activemq;
 
-import org.apache.activemq.ActiveMQConnectionFactory;
+/*import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,11 +11,11 @@ import org.springframework.jms.config.SimpleJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsMessagingTemplate;
 import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
-import javax.jms.Topic;
+import javax.jms.Topic;*/
 
-@Configuration
+//@Configuration
 public class BeanConfig {
-    @Value("${spring.activemq.broker-url}")
+     /* @Value("${spring.activemq.broker-url}")
     private String brokerUrl;
 
     @Value("${spring.activemq.user}")
@@ -45,7 +45,7 @@ public class BeanConfig {
         return new ActiveMQConnectionFactory(username, password, brokerUrl);
     }
 
-    @Bean
+  @Bean
     public JmsMessagingTemplate jmsMessageTemplate(){
         return new JmsMessagingTemplate(connectionFactory());
     }
@@ -66,5 +66,5 @@ public class BeanConfig {
         factory.setConnectionFactory(connectionFactory);
         factory.setPubSubDomain(true);
         return factory;
-    }
+    }*/
 }

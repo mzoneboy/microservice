@@ -5,17 +5,17 @@ import com.example.microservice.Entity.Student;
 import com.example.microservice.dao.StudentDao;
 import com.example.microservice.impl.SpringAwareLearnBean;
 import com.example.microservice.intf.CacheService;
+import com.example.microservice.intf.StuRpcService;
 import com.github.pagehelper.PageInfo;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +35,10 @@ public class StudentController {
 
     @Autowired
     private SpringAwareLearnBean springAwareLearnBean;
+
+    @Autowired
+    private StuRpcService stuRpcService;
+
 
     @RequestMapping("list")
     public List<Map<String, Object>> queryList() {
@@ -87,5 +91,22 @@ public class StudentController {
     @RequestMapping("say")
     public void say() {
         springAwareLearnBean.say();
+    }
+
+    @RequestMapping("aop")
+    public int test() {
+       /* Cash cash = new Cash();
+        cash.setValue(100);
+        return cash.getValue();*/
+
+        return stuRpcService.add(1, 2);
+    }
+
+    @PostMapping("check")
+    public String check(@Validated @RequestBody Student student, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return bindingResult.getFieldError().getDefaultMessage();
+        }
+        return String.format("%s success", student.getName());
     }
 }

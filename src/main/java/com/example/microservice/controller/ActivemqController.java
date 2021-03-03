@@ -1,19 +1,19 @@
 package com.example.microservice.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+/*import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsMessagingTemplate;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;*/
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+/*import org.springframework.web.bind.annotation.RestController;
 
 import javax.jms.Destination;
 import javax.jms.Queue;
-import javax.jms.Topic;
+import javax.jms.Topic;*/
 
 @RequestMapping("/activemq")
-@RestController
+//@RestController
 public class ActivemqController {
-    @Autowired
+  /*  @Autowired
     private JmsMessagingTemplate jmsMessagingTemplate;
 
     @Autowired
@@ -37,5 +37,5 @@ public class ActivemqController {
     // 发送消息，destination是发送到的队列，message是待发送的消息
     private void sendMessage(Destination destination, final String message){
         jmsMessagingTemplate.convertAndSend(destination, message);
-    }
+    }*/
 }
